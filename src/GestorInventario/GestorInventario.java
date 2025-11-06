@@ -52,7 +52,7 @@ public class GestorInventario {
 	}
 	
 	public static void cargarInventario(ArrayList<Producto> inventario) {
-		String nombreArchivo = "inventario.txt";
+		String nombreArchivo = "src/GestorInventario/inventario.txt";
 		
 		try (FileReader fr = new FileReader(nombreArchivo);
 				BufferedReader br = new BufferedReader(fr)) {
@@ -80,7 +80,7 @@ public class GestorInventario {
 	
 	
 	public static void guardarInventario(ArrayList<Producto> inventario) {
-		String nombreArchivo = "inventario.txt";
+		String nombreArchivo = "src/GestorInventario/inventario.txt";
 		
 		try (FileWriter fw = new FileWriter(nombreArchivo);
 				BufferedWriter bw = new BufferedWriter(fw)) {
