@@ -1,4 +1,4 @@
-package ejercicio.poo1.poo1;
+package pooExercises.poo1;
 
 public class UsoProducto {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ejercicio.poo1.poo4;
+package pooExercises.poo4;
 
 
 public class UsoCompañia {
