@@ -3,7 +3,23 @@ package ejercicio.poo1.poo4;
 
 public class UsoCompañia {
 	public static void main(String[] args) {
+		Compañia Google= new Compañia("Google", 100);
+		Compañia Bing= new Compañia("Bing", 50);
 		
+		Google.contratarEmpleado("Pepe Mendoza", 3500);
+		Google.contratarEmpleado("Manoli", 4500);
+		Bing.contratarEmpleado("Irene Pérez", 2200);
+		Bing.contratarEmpleado("Jose Manuel", 3800);
+		
+		Google.getTodosEmpleados();
+		Bing.getTodosEmpleados();
+		
+		Bing.despedirEmpleado("Irene Pérez");
+		
+		Bing.subirSalario("Jose Manuel", 4000);
+		
+		Google.getTodosEmpleados();
+		Bing.getTodosEmpleados();
 	}
 }
 
