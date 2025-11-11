@@ -4,8 +4,7 @@ import java.awt.GraphicsEnvironment;
 
 public class LetrasEnLocal {
 	public static void main(String[] args) {
-		GraphicsEnvironment g= GraphicsEnvironment.getLocalGraphicsEnvironment();
-		String fonts[]= g.getAvailableFontFamilyNames();
+		String fonts[]= GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 		
 		for (int i=0; i<fonts.length; i++) {
 			System.out.println(fonts[i]);
