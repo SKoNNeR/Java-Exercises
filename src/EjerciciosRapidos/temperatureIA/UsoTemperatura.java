@@ -26,14 +26,12 @@ class Termostato implements Regulable {
 	public void subirTemperatura() {
 		// TODO Auto-generated method stub
 		if (temperaturaActual < Regulable.TEMPERATURA_MAXIMA) temperaturaActual++;
-		else System.out.println("No puedes subir más de 30ºC. ¿A caso quieres derretirte?");
 	}
 
 	@Override
 	public void bajarTemperatura() {
 		// TODO Auto-generated method stub
 		if (temperaturaActual > Regulable.TEMPERATURA_MINIMA) temperaturaActual--;
-		else System.out.println("No puedes bajar de 10ºC. Te entiendo, el calor es insoportable.");
 	}
 	
 	public int getTemp() {
@@ -60,6 +58,7 @@ class MiLamina extends JPanel implements ActionListener {
 	
 	private Termostato t;
 	private JLabel temp;
+	private JLabel tempWarning;
 	
 	public MiLamina (Termostato t) {
 		this.t= t;
@@ -68,6 +67,9 @@ class MiLamina extends JPanel implements ActionListener {
 		setLayout(null);
 		setFocusable(true);
 		addKeyListener(new KeyController());
+		tempWarning= new JLabel("");
+		tempWarning.setBounds(190, 300, 300, 30);
+		tempWarning.setForeground(Color.WHITE);
 		bajarTemp.setBounds(60, 250,200,30);
 		subirTemp.setBounds(290, 250,200,30);
 		temp.setFont(new Font("SanSerif", Font.BOLD, 90));
@@ -77,6 +79,7 @@ class MiLamina extends JPanel implements ActionListener {
 		add(subirTemp);
 		add(bajarTemp);
 		add(temp);
+		add(tempWarning);
 		
 		subirTemp.addActionListener(this);
 		bajarTemp.addActionListener(this);
@@ -87,19 +90,45 @@ class MiLamina extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() == subirTemp) t.subirTemperatura();
-		else if (e.getSource() == bajarTemp) t.bajarTemperatura();
+		if (e.getSource() == subirTemp) {
+			intentarSubir();
+		} else if (e.getSource() == bajarTemp) {
+			intentarBajar();
+		}
+		actualizarVista();
+		requestFocusInWindow();
+	}
+	
+	
+
+	private class KeyController extends KeyAdapter {
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				intentarSubir();
+			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				intentarBajar();
+			}
+			actualizarVista();
+		}
+	}
+	public void intentarSubir() {
+		if (t.getTemp() == Regulable.TEMPERATURA_MAXIMA) tempWarning.setText("No puedes subir más de 30ºC!");
+		else {
+			t.subirTemperatura();
+			tempWarning.setText("");
+		}
+	}
+	public void intentarBajar() {
+		if (t.getTemp() == Regulable.TEMPERATURA_MINIMA) tempWarning.setText("No puedes bajar de 10ºC!");
+		else {
+			t.bajarTemperatura();
+			tempWarning.setText("");
+		}
+	}
+	
+	public void actualizarVista() {
 		temp.setText(t.getTemp() + "ºC");
 		setBackColor();
-	}
-
-	class KeyController extends KeyAdapter {
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_UP) t.subirTemperatura();
-			else if (e.getKeyCode() == KeyEvent.VK_DOWN) t.bajarTemperatura();
-			temp.setText(t.getTemp() + "ºC");
-			setBackColor();
-		}
 	}
 	
 	public void setBackColor() {
