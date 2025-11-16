@@ -181,6 +181,7 @@ class CalculatorLayer extends JPanel {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) processOperation("=");
 			else if (e.getKeyCode() == KeyEvent.VK_DELETE) processOperation("C");
 			else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) processOperation("DEL");
+			else if (e.getKeyCode() == KeyEvent.VK_DECIMAL) processOperation(",");
 			else {
 				char c= e.getKeyChar();
 				String numString= String.valueOf(c);
