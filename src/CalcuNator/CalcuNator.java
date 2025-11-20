@@ -72,7 +72,7 @@ class CalculatorLayer extends JPanel {
 		addButton("+", brain);
 		addButton("", brain);
 		addButton("0", brain);
-		addButton(",", brain);
+		addButton(".", brain);
 		addButton("=", brain);
 		
 		addKeyListener(brain);
